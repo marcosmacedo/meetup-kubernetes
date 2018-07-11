@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  #Nombre del deployment
+  name: meetup-kubernetes-deployment
+  labels:
+    #Key-value que identifica al deployment
+    app: meetup-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      #Los pods a los que aplica
+      app: meetup-app
+  template:
+    metadata:
+      labels:
+        #Label a asignar a los pods
+        app: meetup-app
+    spec:
+      containers:
+      - name: meetup-kubernetes
+        #Este campo corresponde a una imagen en DockerHub (si no está local)
+        image: marcosmacedo/meetup-kubernetes
+        ports:
+        - containerPort: 8000
